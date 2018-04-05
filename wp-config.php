@@ -20,16 +20,21 @@
 
 // ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define('DB_NAME', 'wordpress');
+
+
+
+
+
+define('DB_NAME', getenv('DB_NAME') ? getenv('DB_NAME') : 'wordpress');
 
 /** MySQL database username */
-define('DB_USER', 'wordpress');
+define('DB_USER', getenv('DB_USER') ? getenv('DB_USER') : 'wordpress');
 
 /** MySQL database password */
-define('DB_PASSWORD', 'wordpress');
+define('DB_PASSWORD', getenv('DB_PASSWORD') ? getenv('DB_PASSWORD') : 'wordpress');
 
 /** MySQL hostname */
-define('DB_HOST', '127.0.0.1');
+define('DB_HOST', getenv('DB_HOST') ? getenv('DB_HOST') : '127.0.0.1');
 
 /** Database Charset to use in creating database tables. */
 define('DB_CHARSET', 'utf8mb4');
@@ -55,6 +60,28 @@ define('SECURE_AUTH_SALT', 'L6sv%,xk0A4IuQ(6{fEXf`:F0^(3>-e^@sDI;>e;OFiO!6 (g{;g
 define('LOGGED_IN_SALT',   '!.YN2gu&-([j(_uIwu^]B&(gTb)}{z3O8R0l+0mZYffkxnjaGi{$v@]x`h$wVb+Q');
 define('NONCE_SALT',       '(k9MSpI#Ln)K<9v/vDx/B)UFs:vx@w-0r[EF3mtS~/j{RMVy9d+Fq/zJmNX[L0};');
 
+
+if ( getenv('WP_HOME')) {
+	define('WP_HOME', getenv('WP_HOME'));
+}
+if ( getenv('WP_SITE_URL')) {
+	define('WP_SITE_URL', getenv('WP_SITE_URL'));
+}
+
+
+if ( getenv('WP_DEBUG') ) {
+	define('WP_DEBUG', getenv('WP_DEBUG') === 'true' ?  true : false);
+}
+if ( getenv( 'WP_DEBUG_DISPLAY') ) {
+	define('WP_DEBUG_DISPLAY', getenv('WP_DEBUG_DISPLAY') ==='true' ? true : false);
+}
+
+if ( getenv('WP_SCRIPT_DEBUG') ) {
+	define('WP_SCRIPT_DEBUG', getenv("WP_SCRIPT_DEBUG") === 'true' ? true : false);
+}
+
+
+
 /**#@-*/
 
 /**
@@ -65,19 +92,7 @@ define('NONCE_SALT',       '(k9MSpI#Ln)K<9v/vDx/B)UFs:vx@w-0r[EF3mtS~/j{RMVy9d+F
  */
 $table_prefix  = 'wp_';
 
-/**
- * For developers: WordPress debugging mode.
- *
- * Change this to true to enable the display of notices during development.
- * It is strongly recommended that plugin and theme developers use WP_DEBUG
- * in their development environments.
- *
- * For information on other constants that can be used for debugging,
- * visit the Codex.
- *
- * @link https://codex.wordpress.org/Debugging_in_WordPress
- */
-define('WP_DEBUG', false);
+
 
 /* That's all, stop editing! Happy blogging. */
 
